@@ -1,0 +1,65 @@
+
+// adding geojson overlays on leaflet map//
+<html>
+   <head>
+      <title>Leaflet sample</title>
+      <link rel = "stylesheet" href = "D:\sri\leaflet (1)/leaflet.css"/>
+      <script src = "D:\sri\leaflet (1)/leaflet.js"></script>
+      <script type="text/javascript" src="D:\sri\qgis\districts.json"></script>
+   </head>
+
+   <body>
+      <div id = "map" style = "width: 900px; height: 580px"></div>
+      <script>
+        // Creating map options
+        var mapOptions = {
+            center: [16.385044, 79.486671],
+            zoom: 10
+         }
+         
+         // Creating a map object
+         var mapOptions = {
+            center: [16.506174, 79.486671],
+            zoom: 7
+         }
+         var map = new L.map('map', mapOptions);
+         
+         // Creating a Layer object
+         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+         
+         // Adding layer to the map
+         map.addLayer(layer);
+         // Creating overlays
+         var Mangalagiri = L.marker([16.448, 80.585]).bindPopup('This is Mangalagiri, CO.'),
+             amaravathi  = L.marker([16.57, 80.360]).bindPopup(' amaravathi capital CO.');
+            
+
+var cities = L.layerGroup([Mangalagiri, amaravathi ]);
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+});
+
+var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
+
+//create objects
+var baseMaps = {
+    "OpenStreetMap": osm,
+    "OpenStreetMap.HOT": osmHOT
+};
+
+var overlayMaps = {
+    "Cities": cities
+};
+var myLayer = L.geoJSON().addTo(map);
+myLayer.addData(geojsonFeature);
+        }
+    }
+})
+
+
+      </script>
+   </body>   
+</html>
